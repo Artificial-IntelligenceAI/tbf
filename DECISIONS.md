@@ -5,6 +5,12 @@ Nothing here is final until the owner says so; open questions live at the bottom
 
 ## Decided
 
+### 2026-10-29 — tbf aims to be among the fastest Brainfuck implementations (owner)
+
+The owner: "this Brainfuck should have at least one of the best perf compared to other BFs". So **speed is a goal, not
+a side effect**: a design choice that costs speed has to say why, and the claim is checked by benchmarks against other
+fast implementations on the same programs and the same machine.
+
 ### 2026-10-29 — A program names its cell width in a comment directive, `tbf cell u16`; without one, 8-bit wrapping (owner: (a))
 
 Design claude offered 8-bit wrapping, a choice of 8, 16 or 32 bits, or 32-bit only. The owner: "can't you just pick in
@@ -71,4 +77,5 @@ is no web page and no server.
 - Tape length, and what `,` does at the end of input.
 - The IR and its folds (runs, `[-]`, multiply loops, scans).
 - When a loop is hot: the thresholds for each tier.
+- The benchmark: which programs, and which other implementations tbf is measured against.
 - A license. The repo is public with none yet, which means all rights reserved.
