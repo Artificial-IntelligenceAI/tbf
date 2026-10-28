@@ -5,6 +5,11 @@ Nothing here is final until the owner says so; open questions live at the bottom
 
 ## Decided
 
+### 2026-10-29 — The name is `tbf`, Tankun's Brainfuck (owner: (a))
+
+Design claude offered (a) `tbf`, (b) `tankun-bf`, (c) `hotbf`; the owner: "(a)". So the repo, the crate and the
+command are **`tbf`**: `tbf run hello.bf`.
+
 ### 2026-10-29 — Written in Rust (owner: (a))
 
 Design claude offered (a) Rust, (b) C++, (c) C: Cranelift is a Rust library with no stable C or C++ interface, so
