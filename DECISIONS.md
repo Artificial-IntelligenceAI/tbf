@@ -5,6 +5,12 @@ Nothing here is final until the owner says so; open questions live at the bottom
 
 ## Decided
 
+### 2026-10-29 — Public, at `Artificial-IntelligenceAI/tbf` (owner: (c), "pub")
+
+Design claude offered (a) `Soclets/tbf`, private, (b) `Soclets/tbf`, public, (c) the owner's own account, (d)
+local git only, recommending (a). The owner: "(c)", "pub". So the repo is **public at
+`github.com/Artificial-IntelligenceAI/tbf`**.
+
 ### 2026-10-29 — The name is `tbf`, Tankun's Brainfuck (owner: (a))
 
 Design claude offered (a) `tbf`, (b) `tankun-bf`, (c) `hotbf`; the owner: "(a)". So the repo, the crate and the
