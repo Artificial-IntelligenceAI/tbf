@@ -5,6 +5,15 @@ Nothing here is final until the owner says so; open questions live at the bottom
 
 ## Decided
 
+### 2026-10-29 — Three tiers: interpreter → Cranelift → LLVM (owner: (a))
+
+Design claude offered (a) interpreter → Cranelift → LLVM, (b) Cranelift → LLVM, compiling the whole program up
+front, (c) interpreter → LLVM, recommending (a). The owner: "By 'compile everything up front', when? Precisely": in
+(b), after the frontend and before the first instruction runs, on every run, every loop including ones that never run;
+nothing is saved. The owner: "(a)". So **the interpreter starts at once and counts each loop; a hot loop goes to
+Cranelift, a very hot one to LLVM on a background thread**. The interpreter is also the reference both compilers are
+tested against.
+
 ### 2026-10-29 — Cranelift and LLVM both, tiered like HotSpot's C1 and C2 (owner: "What if we use both? Like Java's C1 C2")
 
 Design claude offered Cranelift, LLVM, Wasm or JVM bytecode. The owner: "what would actually win in perf? (a) or
