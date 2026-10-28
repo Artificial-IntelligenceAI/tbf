@@ -5,6 +5,16 @@ Nothing here is final until the owner says so; open questions live at the bottom
 
 ## Decided
 
+### 2026-10-29 — A program names its cell width in a comment directive, `tbf cell u16`; without one, 8-bit wrapping (owner: (a))
+
+Design claude offered 8-bit wrapping, a choice of 8, 16 or 32 bits, or 32-bit only. The owner: "can't you just pick in
+the syntax? Like, how Rust does `i32`", then "Oh...": Brainfuck's grammar is its 8 commands, and everything else is a
+comment. Design claude offered a directive inside a comment, `tbf cell u16`, which every other Brainfuck tool skips, so
+the program stays valid Brainfuck; a directive may use none of the 8 command characters (`tbf-cell` would run a `-`).
+Offered (a) the directive, 8-bit by default, (b) a flag only, (c) both, the flag winning, (d) 8-bit only; design claude
+recommended (a), and the owner: "(a)". So **a program may name its width, `u8`, `u16` or `u32`, and gets `u8`, wrapping,
+without one**. The width is known before anything runs, so each tier compiles for that one width.
+
 ### 2026-10-29 — Public, at `Artificial-IntelligenceAI/tbf` (owner: (c), "pub")
 
 Design claude offered (a) `Soclets/tbf`, private, (b) `Soclets/tbf`, public, (c) the owner's own account, (d)
@@ -57,7 +67,8 @@ is no web page and no server.
 
 ## Open
 
-- Cell width, tape length, and what `,` does at the end of input.
+- The directive's exact grammar: where it may stand, and what else it may set.
+- Tape length, and what `,` does at the end of input.
 - The IR and its folds (runs, `[-]`, multiply loops, scans).
 - When a loop is hot: the thresholds for each tier.
 - A license. The repo is public with none yet, which means all rights reserved.
