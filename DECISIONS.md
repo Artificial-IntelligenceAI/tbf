@@ -5,6 +5,16 @@ Nothing here is final until the owner says so; open questions live at the bottom
 
 ## Decided
 
+### 2026-10-29 — Cranelift and LLVM both, tiered like HotSpot's C1 and C2 (owner: "What if we use both? Like Java's C1 C2")
+
+Design claude offered Cranelift, LLVM, Wasm or JVM bytecode. The owner: "what would actually win in perf? (a) or
+(b)?" Design claude: LLVM's code is faster, but on Brainfuck most of the speed comes from the IR's own folds (runs,
+`[-]`, multiply loops, scans), which shrinks the gap, and LLVM costs far more compile time on every run; it recommended
+Cranelift first, then LLVM added and benchmarked. The owner: "What if we use both? Like Java's C1 C2". So **Cranelift
+is the quick tier (C1) and LLVM the optimizing tier (C2)**. Brainfuck makes a tier switch cheap: at a loop's entry the
+whole state is the tape and the pointer, so a hot loop compiles to `fn(tape, ptr) -> ptr` and a tier-up is a pointer
+swap at its next entry. There is no speculation to undo.
+
 ### 2026-10-29 — A JIT on an existing code generator, "write once, run anywhere" (owner)
 
 Design claude offered AOT, JIT, or both through one IR, recommending AOT through C first. The owner: "Let's do a
