@@ -5,6 +5,15 @@ Nothing here is final until the owner says so; open questions live at the bottom
 
 ## Decided
 
+### 2026-10-29 — The tape is one large reservation fenced by guard pages; compiled code checks no bounds (owner: (a))
+
+For speed, design claude offered (a) a large fixed tape whose neighbouring pages are marked no-access, (b) 30,000 cells
+with bounds checks, (c) a tape that grows to the right, recommending (a). The owner: "(a)". So **the tape is reserved
+as address space up front (the OS backs only the pages a program touches), a no-access guard page sits past each end,
+and no tier emits a bounds check**: running off an end traps, and tbf catches the trap and reports it as a Brainfuck
+error, "pointer moved left of cell 0", instead of a crash. The cost is handling the OS's fault signal safely, per
+platform.
+
 ### 2026-10-29 — tbf aims to be among the fastest Brainfuck implementations (owner)
 
 The owner: "this Brainfuck should have at least one of the best perf compared to other BFs". So **speed is a goal, not
@@ -74,7 +83,8 @@ is no web page and no server.
 ## Open
 
 - The directive's exact grammar: where it may stand, and what else it may set.
-- Tape length, and what `,` does at the end of input.
+- The tape's size, and where the pointer starts.
+- What `,` does at the end of input.
 - The IR and its folds (runs, `[-]`, multiply loops, scans).
 - When a loop is hot: the thresholds for each tier.
 - The benchmark: which programs, and which other implementations tbf is measured against.
