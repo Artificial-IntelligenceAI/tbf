@@ -5,6 +5,12 @@ Nothing here is final until the owner says so; open questions live at the bottom
 
 ## Decided
 
+### 2026-10-29 — Written in Rust (owner: (a))
+
+Design claude offered (a) Rust, (b) C++, (c) C: Cranelift is a Rust library with no stable C or C++ interface, so
+(b) and (c) would need a Rust bridge anyway; LLVM is reached from Rust through `inkwell` or `llvm-sys`. Design claude
+recommended (a); the owner: "(a)". The first machine is arm64 macOS, with Rust 1.96 and LLVM 23 from Homebrew.
+
 ### 2026-10-29 — Three tiers: interpreter → Cranelift → LLVM (owner: (a))
 
 Design claude offered (a) interpreter → Cranelift → LLVM, (b) Cranelift → LLVM, compiling the whole program up
