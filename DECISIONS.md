@@ -5,6 +5,13 @@ Nothing here is final until the owner says so; open questions live at the bottom
 
 ## Decided
 
+### 2026-10-29 — A JIT on an existing code generator, "write once, run anywhere" (owner)
+
+Design claude offered AOT, JIT, or both through one IR, recommending AOT through C first. The owner: "Let's do a
+'write once, run anywhere' style Brainfuck. So, a JIT with an already existing backend?" So **`tbf` compiles in memory
+and runs at once, and the machine code comes from an existing code generator**, which brings every CPU it supports;
+tbf writes the frontend, the IR and a thin lowering into that generator. No file is written.
+
 ### 2026-10-29 — tbf is a Brainfuck compiler; "frontend/backend" are a compiler's halves (owner: "By frontend/backend, I meant those of a compiler's")
 
 Asked for "a frontend/backend for Brainfuck", design claude read it as a web app (a page and a server) and offered
