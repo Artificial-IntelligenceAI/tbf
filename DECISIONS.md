@@ -5,6 +5,12 @@ Nothing here is final until the owner says so; open questions live at the bottom
 
 ## Decided
 
+### 2026-10-29 — The pointer starts at cell 0, the tape's left end (owner: (a))
+
+Offered (a) cell 0, a `<` there hitting the left guard, (b) the middle of the tape, recommending (a), the standard that
+nearly every program assumes. The owner: "(a)". So **the pointer starts at cell 0**, and a `<` there stops with
+`error: pointer moved left of cell 0`.
+
 ### 2026-10-29 — An unknown or repeated directive is an error; errors stop, and say "error" (owner: "Errors just error, and say \"error\"")
 
 Offered (a) refuse to run, listing the known directives, (b) warn and run, (c) ignore it as a comment; design claude
@@ -110,7 +116,7 @@ is no web page and no server.
 
 ## Open
 
-- The tape's size, and where the pointer starts.
+- The tape's size.
 - The IR and its folds (runs, `[-]`, multiply loops, scans).
 - When a loop is hot: the thresholds for each tier.
 - The benchmark: which programs, and which other implementations tbf is measured against.
