@@ -5,6 +5,15 @@ Nothing here is final until the owner says so; open questions live at the bottom
 
 ## Decided
 
+### 2026-10-29 — Code under Apache-2.0 WITH LLVM-exception, text under CC BY 4.0, as in CyborgPL (owner: (a))
+
+Design claude offered Apache-2.0, MIT or Apache-2.0, MIT or GPL-3.0, saying CyborgPL used Apache-2.0. The owner:
+"CyborgPL uses Apache 2.0 with LLVM exception, and CC-BY 4.0 for their text stuff (say README)" (GitHub's licence label
+drops the exception). The LLVM exception fits a compiler: what a program picks up from the compiler while being compiled
+owes nothing. Offered (a) the same split, (b) Apache-2.0 WITH LLVM-exception for everything, recommending (a); the
+owner: "(a)". So **`LICENSE` is Apache-2.0 WITH LLVM-exception for the code, and `LICENSE-CC-BY-4.0` covers the
+Markdown text**, credited as `tbf GitHub repo text: https://github.com/Artificial-IntelligenceAI/tbf`.
+
 ### 2026-10-29 — The tape is 2³⁰ cells; each guard is at least as large as the program's biggest single move (owner: (a))
 
 The tape is reserved address space, backed only where touched, so its size costs no speed. Offered (a) 2³⁰ cells,
@@ -127,4 +136,3 @@ is no web page and no server.
 - The IR and its folds (runs, `[-]`, multiply loops, scans).
 - When a loop is hot: the thresholds for each tier.
 - The benchmark: which programs, and which other implementations tbf is measured against.
-- A license. The repo is public with none yet, which means all rights reserved.
