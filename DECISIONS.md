@@ -5,6 +5,12 @@ Nothing here is final until the owner says so; open questions live at the bottom
 
 ## Decided
 
+### 2026-10-29 — The `eof` directive's words: `tbf eof 0`, `tbf eof keep`, `tbf eof max` (owner: (a))
+
+Offered (a) `0` / `keep` / `max`, (b) `zero` / `same` / `ones`, (c) `0` / `keep` / `255`; design claude recommended (a):
+`max` is every bit set, −1 at any width (255 for `u8`, 65535 for `u16`), so one word covers each cell width, and none
+of them needs a `-`. The owner: "(a)". So **`tbf eof 0`, `tbf eof keep`, `tbf eof max`**.
+
 ### 2026-10-29 — A program chooses what `,` does at the end of input with a directive, `tbf eof …`; without one, 0 (owner: (d))
 
 Brainfuck leaves this undefined; tools set the cell to 0, to −1, or leave it unchanged, and a program's end-of-input
@@ -92,7 +98,6 @@ is no web page and no server.
 
 - The directive's exact grammar: where it may stand, and what else it may set.
 - The tape's size, and where the pointer starts.
-- The `eof` directive's spellings for 0, unchanged and −1 (no `-` allowed).
 - The IR and its folds (runs, `[-]`, multiply loops, scans).
 - When a loop is hot: the thresholds for each tier.
 - The benchmark: which programs, and which other implementations tbf is measured against.
