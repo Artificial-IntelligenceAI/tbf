@@ -5,6 +5,16 @@ Nothing here is final until the owner says so; open questions live at the bottom
 
 ## Decided
 
+### 2026-10-29 — The IR's first folds are seven; deeper analyses are exploring (owner: (c))
+
+Design claude listed seven known wins: (1) runs, `+++++` as add 5, `>>>` as move 3; (2) clears, `[-]` as set 0; (3)
+offsets, `>+>++<<` as adds at +1 and +2 with no move; (4) multiply and copy loops, `[->+>+++<<]` as cell[+1] += cell,
+cell[+2] += 3 × cell, cell = 0, with no loop; (5) scans, `[>]` and `[<<]` as a search for the next zero, a memory search
+for bytes; (6) known-zero loops, a loop at the start or right after another loop, dropped; (7) set then add, `[-]+++` as
+set 3. Offered (a) all seven, (b) 1 and 2 first, the rest one by one against benchmarks, (c) all seven, deeper ones
+later as exploring; design claude recommended (a). The owner: "(c)". So **the IR does the seven before any tier sees a
+program**, and **deeper analyses, such as a loop that always runs a fixed number of times, are exploring (not built)**.
+
 ### 2026-10-29 — Code under Apache-2.0 WITH LLVM-exception, text under CC BY 4.0, as in CyborgPL (owner: (a))
 
 Design claude offered Apache-2.0, MIT or Apache-2.0, MIT or GPL-3.0, saying CyborgPL used Apache-2.0. The owner:
@@ -133,6 +143,6 @@ is no web page and no server.
 
 ## Open
 
-- The IR and its folds (runs, `[-]`, multiply loops, scans).
+- Deeper IR analyses (exploring): fixed trip counts, and others found by benchmark.
 - When a loop is hot: the thresholds for each tier.
 - The benchmark: which programs, and which other implementations tbf is measured against.
