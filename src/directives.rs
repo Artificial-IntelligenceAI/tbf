@@ -13,16 +13,27 @@ pub fn read(src: &[u8]) -> Result<Settings, Error> {
     let mut eof_line = None;
 
     for (i, line) in src.split(|&b| b == b'\n').enumerate() {
-        if line.iter().any(|b| COMMANDS.contains(b)) {
-            break;
-        }
         let words = words(line);
         let Some(&(col, first)) = words.first() else { continue };
+        let line_no = i + 1;
+        let pos = |col| Pos { line: line_no, col };
+        if let Some(at) = line.iter().position(|b| COMMANDS.contains(b)) {
+            // The header ends here; a `tbf` line holding a command would silently run as code.
+            if first == b"tbf" {
+                let hint = match &words[1..] {
+                    [(_, b"eof"), (_, b"-1")] => "; for −1 write tbf eof max",
+                    _ => "",
+                };
+                return Err(Error::at(
+                    format!("a directive cannot hold \"{}\"{hint}", line[at] as char),
+                    pos(at + 1),
+                ));
+            }
+            break;
+        }
         if first != b"tbf" {
             continue;
         }
-        let line_no = i + 1;
-        let pos = |col| Pos { line: line_no, col };
 
         let Some(&(name_col, name)) = words.get(1) else {
             return Err(Error::at(format!("empty directive; known: {KNOWN}"), pos(col)));
@@ -131,7 +142,7 @@ mod tests {
     #[test]
     fn a_directive_after_the_first_command_is_a_comment() {
         assert_eq!(read(b"+\ntbf cel u16").unwrap(), Settings::default());
-        assert_eq!(read(b"tbf cell u16 +").unwrap(), Settings::default());
+        assert_eq!(read(b"+\ntbf eof -1").unwrap(), Settings::default());
     }
 
     #[test]
@@ -145,5 +156,7 @@ mod tests {
         assert_eq!(err("tbf eof"), "error: directive \"eof\" needs a value; known: 0, keep, max\n  at t.bf:1:5");
         assert_eq!(err("tbf eof 0 keep"), "error: directive \"eof\" takes one value; known: 0, keep, max\n  at t.bf:1:11");
         assert_eq!(err(" tbf"), "error: empty directive; known: cell, eof\n  at t.bf:1:2");
+        assert_eq!(err("tbf eof -1"), "error: a directive cannot hold \"-\"; for −1 write tbf eof max\n  at t.bf:1:9");
+        assert_eq!(err("tbf cell u16\ntbf cell u8 +"), "error: a directive cannot hold \"+\"\n  at t.bf:2:13");
     }
 }

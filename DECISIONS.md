@@ -5,6 +5,14 @@ Nothing here is final until the owner says so; open questions live at the bottom
 
 ## Decided
 
+### 2026-10-29 — A `tbf` line holding a command is an error, not code (owner: (a))
+
+Found while testing: `tbf eof -1` holds a `-`, so under the header rule it was the first line of code; it ran, and the
+end of input stayed 0, with no error. Offered (a) refuse a `tbf` line holding a command, (b) leave it as code, (c) take
+any `tbf` line as a directive, commands and all (other tools would still run the `-`); design claude recommended (a).
+The owner: "(a)". So **the line that ends the header is refused when its first word is `tbf`**:
+`error: a directive cannot hold "-"; for −1 write tbf eof max`. A `tbf` line after the header is still a comment.
+
 ### 2026-10-29 — The benchmark: five classic programs against tritium, bff4 and bfc, timing whole runs (owner: (a))
 
 Offered (a) `mandelbrot.b`, `hanoi.b`, `factor.b`, `long.b` and `dbfi.b` against tritium (an optimizing interpreter
@@ -155,5 +163,3 @@ is no web page and no server.
 - Deeper IR analyses (exploring): fixed trip counts, and others found by benchmark.
 - When a loop is hot: the thresholds for each tier.
 - What `.` writes from a `u16` or `u32` cell: built as its low byte for now.
-- `tbf eof -1` holds a `-`, so the line is code, not a directive: it runs, with no error. Whether a `tbf` line holding
-  a command should be an error.
