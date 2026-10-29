@@ -5,6 +5,15 @@ Nothing here is final until the owner says so; open questions live at the bottom
 
 ## Decided
 
+### 2026-10-29 — The benchmark: five classic programs against tritium, bff4 and bfc, timing whole runs (owner: (a))
+
+Offered (a) `mandelbrot.b`, `hanoi.b`, `factor.b`, `long.b` and `dbfi.b` against tritium (an optimizing interpreter
+with JIT and C backends), bff4 (an optimizing interpreter) and bfc (an LLVM ahead-of-time compiler in Rust), timing the
+whole run, compile included; (b) the same, run time only; (c) another set. Design claude recommended (a): tbf is a JIT,
+so its compile time is part of what a user waits for. The owner: "(a)". So **each tool is timed from start to finish on
+the same machine; bfc is shown both with and without its compile step**. Each download is asked first, naming its
+source and size.
+
 ### 2026-10-29 — The IR's first folds are seven; deeper analyses are exploring (owner: (c))
 
 Design claude listed seven known wins: (1) runs, `+++++` as add 5, `>>>` as move 3; (2) clears, `[-]` as set 0; (3)
@@ -145,4 +154,3 @@ is no web page and no server.
 
 - Deeper IR analyses (exploring): fixed trip counts, and others found by benchmark.
 - When a loop is hot: the thresholds for each tier.
-- The benchmark: which programs, and which other implementations tbf is measured against.
