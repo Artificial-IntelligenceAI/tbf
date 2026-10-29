@@ -5,6 +5,14 @@ Nothing here is final until the owner says so; open questions live at the bottom
 
 ## Decided
 
+### 2026-10-29 — A program chooses what `,` does at the end of input with a directive, `tbf eof …`; without one, 0 (owner: (d))
+
+Brainfuck leaves this undefined; tools set the cell to 0, to −1, or leave it unchanged, and a program's end-of-input
+test depends on which (`,[.,]` stops only if the end sets 0). The owner: "what?"; design claude explained it again with
+`,[.,]` and offered (a) 0, (b) unchanged, (c) −1, (d) a directive, (a) without one, recommending (a). The owner: "(d)".
+So **a program may say what the end of input does, and gets 0 without a directive**. The spellings are open: `-1` cannot
+be written as is, since `-` is a command.
+
 ### 2026-10-29 — The tape is one large reservation fenced by guard pages; compiled code checks no bounds (owner: (a))
 
 For speed, design claude offered (a) a large fixed tape whose neighbouring pages are marked no-access, (b) 30,000 cells
@@ -84,7 +92,7 @@ is no web page and no server.
 
 - The directive's exact grammar: where it may stand, and what else it may set.
 - The tape's size, and where the pointer starts.
-- What `,` does at the end of input.
+- The `eof` directive's spellings for 0, unchanged and −1 (no `-` allowed).
 - The IR and its folds (runs, `[-]`, multiply loops, scans).
 - When a loop is hot: the thresholds for each tier.
 - The benchmark: which programs, and which other implementations tbf is measured against.
