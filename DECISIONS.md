@@ -5,6 +5,13 @@ Nothing here is final until the owner says so; open questions live at the bottom
 
 ## Decided
 
+### 2026-10-29 — An unknown or repeated directive is an error; errors stop, and say "error" (owner: "Errors just error, and say \"error\"")
+
+Offered (a) refuse to run, listing the known directives, (b) warn and run, (c) ignore it as a comment; design claude
+recommended (a), since a typo like `tbf cel u16` ignored would run with 8-bit cells and print wrong output with no clue
+why. The owner: "Errors just error, and say \"error\"". So **an unknown directive or one given twice stops tbf before
+the program runs**, and an error's message begins `error:`, as in `error: unknown directive "cel"; known: cell, eof`.
+
 ### 2026-10-29 — Directives stand only at the top, before the first command, one per line (owner: (a))
 
 The risk: another program's prose ("tested with tbf cell u16 and …") read as a setting. Offered (a) only before the
@@ -103,7 +110,6 @@ is no web page and no server.
 
 ## Open
 
-- A directive tbf does not know, or one given twice.
 - The tape's size, and where the pointer starts.
 - The IR and its folds (runs, `[-]`, multiply loops, scans).
 - When a loop is hot: the thresholds for each tier.
