@@ -5,6 +5,14 @@ Nothing here is final until the owner says so; open questions live at the bottom
 
 ## Decided
 
+### 2026-10-29 — A directive chooses what `.` writes, `tbf out byte` or `tbf out utf8`; without one, the low byte (owner: (c); not built)
+
+A `u16` or `u32` cell can hold 955 or 128512, more than a byte. Offered (a) the low byte, as most wide-cell tools do,
+(b) the value as a Unicode character in UTF-8, 955 as `λ`, (c) a directive, `tbf out byte` / `tbf out utf8`, (a) by
+default; design claude recommended (a). The owner: "(c)". So **`tbf out byte` writes the cell's low byte, the default,
+and `tbf out utf8` writes the cell as a character in UTF-8**. Open: what a value that is no character does, and whether
+`,` reads a whole character under `utf8`.
+
 ### 2026-10-29 — A `tbf` line holding a command is an error, not code (owner: (a))
 
 Found while testing: `tbf eof -1` holds a `-`, so under the header rule it was the first line of code; it ran, and the
@@ -162,4 +170,4 @@ is no web page and no server.
 
 - Deeper IR analyses (exploring): fixed trip counts, and others found by benchmark.
 - When a loop is hot: the thresholds for each tier.
-- What `.` writes from a `u16` or `u32` cell: built as its low byte for now.
+- Under `tbf out utf8`: what a value that is no character does, and whether `,` reads a whole character.
