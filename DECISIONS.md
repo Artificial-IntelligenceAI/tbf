@@ -5,6 +5,13 @@ Nothing here is final until the owner says so; open questions live at the bottom
 
 ## Decided
 
+### 2026-10-29 — Under `tbf out utf8`, a value that is no character is an error (owner: (a); not built)
+
+The surrogates, D800–DFFF, and anything past 10FFFF are no characters; only `u16` and `u32` cells reach them. Offered
+(a) an error, (b) `�` and go on, (c) the low byte for that value; design claude recommended (a), as a bug in nearly
+every case and an error under "errors just error". The owner: "(a)". So **`.` stops with
+`error: . met 55296, which is not a character`**.
+
 ### 2026-10-29 — A directive chooses what `.` writes, `tbf out byte` or `tbf out utf8`; without one, the low byte (owner: (c); not built)
 
 A `u16` or `u32` cell can hold 955 or 128512, more than a byte. Offered (a) the low byte, as most wide-cell tools do,
@@ -170,4 +177,4 @@ is no web page and no server.
 
 - Deeper IR analyses (exploring): fixed trip counts, and others found by benchmark.
 - When a loop is hot: the thresholds for each tier.
-- Under `tbf out utf8`: what a value that is no character does, and whether `,` reads a whole character.
+- Under `tbf out utf8`: whether `,` reads a whole character.
