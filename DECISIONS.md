@@ -154,3 +154,6 @@ is no web page and no server.
 
 - Deeper IR analyses (exploring): fixed trip counts, and others found by benchmark.
 - When a loop is hot: the thresholds for each tier.
+- What `.` writes from a `u16` or `u32` cell: built as its low byte for now.
+- `tbf eof -1` holds a `-`, so the line is code, not a directive: it runs, with no error. Whether a `tbf` line holding
+  a command should be an error.
