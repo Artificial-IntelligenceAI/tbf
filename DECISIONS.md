@@ -5,6 +5,13 @@ Nothing here is final until the owner says so; open questions live at the bottom
 
 ## Decided
 
+### 2026-10-29 — Directives stand only at the top, before the first command, one per line (owner: (a))
+
+The risk: another program's prose ("tested with tbf cell u16 and …") read as a setting. Offered (a) only before the
+first command character, one per line, (b) anywhere, (c) the first line only, every setting together; design claude
+recommended (a). The owner: "(a)". So **tbf reads directives from the lines before the first of the 8 commands, and stops
+looking there**; a `tbf …` later in the file is a comment.
+
 ### 2026-10-29 — The `eof` directive's words: `tbf eof 0`, `tbf eof keep`, `tbf eof max` (owner: (a))
 
 Offered (a) `0` / `keep` / `max`, (b) `zero` / `same` / `ones`, (c) `0` / `keep` / `255`; design claude recommended (a):
@@ -96,7 +103,7 @@ is no web page and no server.
 
 ## Open
 
-- The directive's exact grammar: where it may stand, and what else it may set.
+- A directive tbf does not know, or one given twice.
 - The tape's size, and where the pointer starts.
 - The IR and its folds (runs, `[-]`, multiply loops, scans).
 - When a loop is hot: the thresholds for each tier.
