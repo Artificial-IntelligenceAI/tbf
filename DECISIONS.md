@@ -5,6 +5,14 @@ Nothing here is final until the owner says so; open questions live at the bottom
 
 ## Decided
 
+### 2026-10-29 — The tape is 2³⁰ cells; each guard is at least as large as the program's biggest single move (owner: (a))
+
+The tape is reserved address space, backed only where touched, so its size costs no speed. Offered (a) 2³⁰ cells,
+(b) 30,000, (c) a `tbf tape` directive, (a) by default, recommending (a). The owner: "(a)". So **the tape is 2³⁰ cells**
+(1 GiB of address space for `u8`, 4 GiB for `u32`). Since the IR folds moves (`>>>>…` is one move by N), one move could
+leap a one-page guard; so **each guard region is rounded up to cover the largest move or offset in the program**, which
+tbf knows before it runs.
+
 ### 2026-10-29 — The pointer starts at cell 0, the tape's left end (owner: (a))
 
 Offered (a) cell 0, a `<` there hitting the left guard, (b) the middle of the tape, recommending (a), the standard that
@@ -116,7 +124,6 @@ is no web page and no server.
 
 ## Open
 
-- The tape's size.
 - The IR and its folds (runs, `[-]`, multiply loops, scans).
 - When a loop is hot: the thresholds for each tier.
 - The benchmark: which programs, and which other implementations tbf is measured against.
